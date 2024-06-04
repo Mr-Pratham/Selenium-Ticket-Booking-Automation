@@ -6,4 +6,4 @@ This repository contains the code for the ```Ticket Booking using Selenium proje
 
 
 # Teammate
-* My Friend ```Sri Kumar Aryan```chelped me to create this project.
+* My Friend ```Sri Kumar Aryan```helped me to create this project.
