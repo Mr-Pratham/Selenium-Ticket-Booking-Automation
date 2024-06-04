@@ -2,8 +2,8 @@
  
 This repository contains the code for the ```Ticket Booking using Selenium project```. 
 
-* This was ```my first time``` trying out ```SELENIUM``` AND i use ```JAVA``` very less. ```C++ is my every day Coding Language.```
+* This was ```my first time``` trying out ```SELENIUM``` and this project was quite challenging becuase i do not use ```JAVA``` often. Nonethless i was able to complete it with a teammate's help and the feeling was very good when the project finally ran.  
 
 
 # Teammate
-* My Friend ```Sri Kumar Aryan```helped me to create this project.
+* ```Sri Kumar Aryan```
