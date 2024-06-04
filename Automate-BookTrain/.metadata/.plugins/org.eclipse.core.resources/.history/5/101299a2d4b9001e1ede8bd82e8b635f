@@ -1,0 +1,196 @@
+package BookTrain;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
+public class TrainBookSelanium {
+	WebDriver driver;
+
+	public void launchBrowser() throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver",
+				"C:\\Users\\KIIT\\Desktop\\Automate-BookTrain\\chromedriver-win64\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get("https://www.makemytrip.com/railways/");
+		// Check if you have landed in the correct page
+		// Print the URL and Title of the Page
+		String title = driver.getTitle();
+		System.out.println("Title of the page is: " + title);
+		String url = driver.getCurrentUrl();
+		System.out.println("URL of the page is: " + url);
+
+		// click on element using xpath
+		driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div/div/div/div[2]/div/div[1]/label/span")).click();
+		// click on element using id
+
+		Thread.sleep(1000);
+		driver.findElement(
+				By.xpath("//*[@id='root']/div/div[2]/div/div/div/div[2]/div/div[1]/div[1]/div/div/div/input"))
+				.sendKeys("Delhi");
+		// wait until element is not visible
+		Thread.sleep(2000);
+
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		// find the length of all the elements find using selector
+		int length = driver.findElements(By.cssSelector("ul.react-autosuggest__suggestions-list > li")).size();
+		System.out.println("Length of the list is: " + length);
+
+		// define a loop to iterate through the list
+		for (int i = 0; i < length; i++) {
+			// find the element using index
+			String element = driver.findElements(By.cssSelector(
+					"ul.react-autosuggest__suggestions-list > li > div > div > p.searchedResult.font14.darkText > span"))
+					.get(i).getText();
+			System.out.println("Element is: " + element);
+			// check if the element is equal to the search term
+			if (element.equals("Delhi")) {
+				// click on the element
+				driver.findElements(By.cssSelector(
+						"ul.react-autosuggest__suggestions-list > li > div > div > p.searchedResult.font14.darkText > span"))
+						.get(i).click();
+				break;
+			}
+		}
+
+		// Selecting Destination
+		// click on element using xpath
+		driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div/div/div/div[2]/div/div[2]/label/span")).click();
+		// click on element using id
+
+		Thread.sleep(1000);
+		driver.findElement(
+				By.xpath("//*[@id=\"top-banner\"]/div[2]/div/div/div/div[2]/div/div[2]/div[1]/div/div/div/input"))
+				.sendKeys("Lucknow");
+		// wait until element is not visible
+		Thread.sleep(2000);
+
+		// find the length of all the elements find using selector
+		length = driver.findElements(By.cssSelector("ul.react-autosuggest__suggestions-list > li")).size();
+		System.out.println("Length of the list is: " + length);
+
+		// define a loop to iterate through the list
+		for (int i = 0; i < length; i++) {
+			// find the element using index
+			String element = driver.findElements(By.cssSelector(
+					"ul.react-autosuggest__suggestions-list > li > div > div > p.searchedResult.font14.darkText > span"))
+					.get(i).getText();
+			System.out.println("Element is: " + element);
+			// check if the element is equal to the search term
+			if (element.equals("Lucknow")) {
+				// click on the element
+				driver.findElements(By.cssSelector(
+						"ul.react-autosuggest__suggestions-list > li > div > div > p.searchedResult.font14.darkText > span"))
+						.get(i).click();
+				break;
+			}
+		}
+
+		// Selecting Date
+		// ...
+
+		// Selecting Date
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div/div/div/div[2]/div/div[3]")).click();
+		Thread.sleep(1000);
+
+		// Clicking on the specific date "20 May 2024"
+		String targetDate = "20 May 2024";
+		String[] dateParts = targetDate.split(" ");
+		String day = dateParts[0];
+		String month = dateParts[1];
+		String year = dateParts[2];
+
+		String xpathExpression = String.format("//*[@id='root']/div/div[2]/div/div/div/div[2]/div/div[3]/div[1]/div/div/div/div[2]/div/div[2]/div[1]/div[%s]/div[%s]/div[%s]",
+		        findMonthIndex(month), findWeekIndex(day, year), findDayIndex(day));
+
+		driver.findElement(By.xpath(xpathExpression)).click();
+
+		// ...
+
+		// Helper method to find the index of the month in the date picker
+		private String findMonthIndex(String month) {
+		    // You may need to adjust this method based on the structure of your date picker
+		    switch (month.toLowerCase()) {
+		        case "january":
+		            return "1";
+		        case "february":
+		            return "2";
+		        // Add cases for other months as needed
+		        default:
+		            throw new IllegalArgumentException("Invalid month: " + month);
+		    }
+		}
+
+		// Helper method to find the index of the week in the date picker
+		private String findWeekIndex(String day, String year) {
+		    // You may need to adjust this method based on the structure of your date picker
+		    // This example assumes a simple structure where weeks are rows and days are columns
+		    int dayOfMonth = Integer.parseInt(day);
+		    int currentDayOfWeek = LocalDate.of(Integer.parseInt(year), Month.MAY, 1).getDayOfWeek().getValue(); // Assuming May 1, 2024, is a Monday
+
+		    // Calculate the column index of the day in the date picker
+		    int columnIndex = (dayOfMonth + currentDayOfWeek - 1) % 7 + 1;
+
+		    return String.valueOf(columnIndex);
+		}
+
+		// Helper method to find the index of the day in the date picker
+		private String findDayIndex(String day) {
+		    // You may need to adjust this method based on the structure of your date picker
+		    // This example assumes a simple structure where days are represented as columns in each week
+		    // and weeks are represented as rows
+		    switch (day.toLowerCase()) {
+		        case "monday":
+		            return "2"; // Assuming Monday is the second day in the date picker
+		        case "tuesday":
+		            return "3";
+		        case "wednesday":
+		            return "4";
+		        case "thursday":
+		            return "5";
+		        case "friday":
+		            return "6";
+		        case "saturday":
+		            return "7";
+		        case "sunday":
+		            return "1";
+		        default:
+		            throw new IllegalArgumentException("Invalid day: " + day);
+		    }
+		}
+
+
+		// Selecting Class
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div/div/div/div[2]/div/div[4]")).click();
+		length = driver.findElements(By.cssSelector("ul.travelForPopup > li")).size();
+		System.out.println("Length of the list is: " + length);
+		for (int i = 0; i < length; i++) {
+			String element = driver.findElements(By.cssSelector("ul.travelForPopup > li")).get(i).getText();
+			System.out.println("Element is: " + element);
+			if (element.equals("Third AC")) {
+				driver.findElements(By.cssSelector("ul.travelForPopup > li")).get(i).click();
+				break;
+			}
+		}
+
+		// Clicking Search button
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div/div/div/div[2]/p/a")).click();
+		driver.close();
+
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+		TrainBookSelanium obj = new TrainBookSelanium();
+		obj.launchBrowser();
+
+	}
+
+}

@@ -1,0 +1,6 @@
+"TrainBooking --> src --> BookTrain --> TrainBookSelanium.java 
+
+1) Open TrainBooking Folder
+2) Open src
+3) OPEN BookTrain
+4) "TrainBookSelanium.java" IS OUR FILE

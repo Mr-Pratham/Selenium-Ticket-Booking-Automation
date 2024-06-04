@@ -1,0 +1,106 @@
+package BookTrain;
+
+
+//import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.chrome.ChromeDriver;
+//
+//public class TrainBookSelanium {
+//
+//    public static void main(String[] args) {
+//        // Set the path to your chromedriver.exe
+//        System.setProperty("webdriver.chrome.driver", "C:\\Users\\KIIT\\Desktop\\Automate-BookTrain\\chromedriver-win64\\chromedriver.exe");
+//
+//        // Create a new instance of the Chrome driver
+//        WebDriver driver = new ChromeDriver();
+//
+//        // Navigate to a specific URL (replace with your desired URL)
+//        driver.get("https://www.makemytrip.com/railways/");
+//
+//        // Print the title of the page
+//        System.out.println("Page Title: " + driver.getTitle());
+//
+//        // Close the browser
+//        driver.quit();
+//    }
+//}
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class TrainBookSelanium {
+    public static void main(String[] args) {
+        // Set the path to your chromedriver.exe
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver.exe");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to the MakeMyTrip railway page
+        driver.get("https://www.makemytrip.com/railways/");
+
+        // Check if you have landed on the correct page
+        if (driver.getTitle().contains("MakeMyTrip")) {
+            System.out.println("Landed on the correct page");
+        } else {
+            System.out.println("Not on the correct page");
+        }
+
+        // Print the URL and Title of the Page
+        System.out.println("Current URL: " + driver.getCurrentUrl());
+        System.out.println("Current Title: " + driver.getTitle());
+
+        // Click on FROM
+        WebElement fromInput = driver.findElement(By.id("fromCity"));
+        fromInput.click();
+
+        // Enter the city in FROM: DELHI
+        WebElement fromCityInput = driver.findElement(By.xpath("//input[@placeholder='From']"));
+        fromCityInput.sendKeys("DELHI");
+
+        // Click on TO
+        WebElement toInput = driver.findElement(By.id("toCity"));
+        toInput.click();
+
+        // Enter the city in TO: LUCKNOW
+        WebElement toCityInput = driver.findElement(By.xpath("//input[@placeholder='To']"));
+        toCityInput.sendKeys("LUCKNOW");
+
+        // Click on Travel Date
+        WebElement travelDateInput = driver.findElement(By.id("travelDate"));
+        travelDateInput.click();
+
+        // Select a date: 20 May
+        WebElement date20May = driver.findElement(By.xpath("//div[@aria-label='20 May']"));
+        date20May.click();
+
+        // Click on class
+        WebElement classInput = driver.findElement(By.id("class_selector"));
+        classInput.click();
+
+        // Select a class from dropdown: Third AC
+        Select classDropdown = new Select(driver.findElement(By.id("class_selector")));
+        classDropdown.selectByVisibleText("Third AC");
+
+        // Click on SEARCH Button
+        WebElement searchButton = driver.findElement(By.xpath("//button[@class='search-btn']"));
+        searchButton.click();
+
+        // Wait for the search results page to load
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.titleContains("Search Results"));
+
+        // Record the Automation Script Running using any Screen Recording Software.
+
+        // Save screenshots and logs of all the steps (screenshot code to be added for each step)
+
+        // Close the browser
+        driver.quit();
+    }
+}
+

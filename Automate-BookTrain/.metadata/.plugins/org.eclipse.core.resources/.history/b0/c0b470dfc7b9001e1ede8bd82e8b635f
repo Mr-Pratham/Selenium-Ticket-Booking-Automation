@@ -1,0 +1,25 @@
+package BookTrain;
+
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TrainBookSelanium {
+
+    public static void main(String[] args) {
+        // Set the path to your chromedriver.exe
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\KIIT\\Desktop\\Automate-BookTrain\\chromedriver-win64\\chromedriver.exe");
+
+        // Create a new instance of the Chrome driver
+        WebDriver driver = new ChromeDriver();
+
+        // Navigate to a specific URL (replace with your desired URL)
+        driver.get("https://www.makemytrip.com/railways/");
+
+        // Print the title of the page
+        System.out.println("Page Title: " + driver.getTitle());
+
+        // Close the browser
+        driver.quit();
+    }
+}
